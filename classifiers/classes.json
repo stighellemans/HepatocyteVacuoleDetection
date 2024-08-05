@@ -1,0 +1,28 @@
+{
+  "pathClasses": [
+    {
+      "name": "Nucleus",
+      "color": -16776961
+    },
+    {
+      "name": "Cytoplasm",
+      "color": -5064721
+    },
+    {
+      "name": "Vacuole",
+      "color": -13054376
+    },
+    {
+      "name": "Background",
+      "color": -7662170
+    },
+    {
+      "name": "Membrane",
+      "color": -3404480
+    },
+    {
+      "name": "Cell",
+      "color": -65281
+    }
+  ]
+}

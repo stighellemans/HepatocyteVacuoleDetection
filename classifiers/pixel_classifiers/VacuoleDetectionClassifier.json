@@ -1,0 +1,239 @@
+{
+  "pixel_classifier_type": "OpenCVPixelClassifier",
+  "metadata": {
+    "inputPadding": 0,
+    "inputResolution": {
+      "pixelWidth": {
+        "value": 1.760891891743168,
+        "unit": "µm"
+      },
+      "pixelHeight": {
+        "value": 1.760891891743168,
+        "unit": "µm"
+      },
+      "zSpacing": {
+        "value": 1.0,
+        "unit": "z-slice"
+      },
+      "timeUnit": "SECONDS",
+      "timepoints": []
+    },
+    "inputWidth": 512,
+    "inputHeight": 512,
+    "inputNumChannels": 3,
+    "outputType": "CLASSIFICATION",
+    "outputChannels": [
+      {
+        "name": "cytoplasm",
+        "color": -65281
+      },
+      {
+        "name": "vacuole",
+        "color": -13054376
+      }
+    ],
+    "classificationLabels": {
+      "0": {
+        "name": "cytoplasm",
+        "color": [
+          255,
+          0,
+          255
+        ]
+      },
+      "1": {
+        "name": "vacuole",
+        "color": [
+          56,
+          206,
+          88
+        ]
+      }
+    }
+  },
+  "op": {
+    "type": "data.op.channels",
+    "colorTransforms": [
+      {
+        "channelName": "Red"
+      },
+      {
+        "channelName": "Green"
+      },
+      {
+        "channelName": "Blue"
+      }
+    ],
+    "op": {
+      "type": "op.core.sequential",
+      "ops": [
+        {
+          "type": "op.core.sequential",
+          "ops": [
+            {
+              "type": "op.core.split-merge",
+              "ops": [
+                {
+                  "type": "op.filters.multiscale",
+                  "features": [
+                    "GAUSSIAN",
+                    "LAPLACIAN",
+                    "WEIGHTED_STD_DEV",
+                    "GRADIENT_MAGNITUDE"
+                  ],
+                  "sigmaX": 1.0,
+                  "sigmaY": 1.0
+                }
+              ]
+            },
+            {
+              "type": "op.ml.feature-preprocessor",
+              "preprocessor": {
+                "normalizer": {
+                  "offsets": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scales": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "missingValue": 0.0
+                },
+                "inputLength": 12,
+                "outputLength": 12
+              }
+            }
+          ]
+        },
+        {
+          "type": "op.ml.opencv-statmodel",
+          "model": {
+            "class": "ANN_MLP",
+            "statmodel": {
+              "opencv_ml_ann_mlp": {
+                "format": 3,
+                "layer_sizes": [
+                  12,
+                  2
+                ],
+                "activation_function": "SIGMOID_SYM",
+                "f_param1": 1.0,
+                "f_param2": 1.0,
+                "min_val": -9.4999999999999996e-01,
+                "max_val": 9.4999999999999996e-01,
+                "min_val1": -9.7999999999999998e-01,
+                "max_val1": 9.7999999999999998e-01,
+                "training_params": {
+                  "train_method": "RPROP",
+                  "dw0": 1.0000000000000001e-01,
+                  "dw_plus": 1.2000000000000000e+00,
+                  "dw_minus": 5.0000000000000000e-01,
+                  "dw_min": 1.1920928955078125e-07,
+                  "dw_max": 50.0,
+                  "term_criteria": {
+                    "epsilon": 1.0000000000000000e-02,
+                    "iterations": 1000
+                  }
+                },
+                "input_scale": [
+                  4.2187327515888579e-02,
+                  -7.3817926464436017e+00,
+                  9.5624533313488122e-02,
+                  1.4238319796099130e-01,
+                  1.3077986249329837e-01,
+                  -1.8068166412752837e+00,
+                  1.3887587897605108e-01,
+                  -1.3007203154148634e+00,
+                  3.4803472487475791e-02,
+                  -5.9437039658091431e+00,
+                  9.1879931732689449e-02,
+                  1.5679674882741482e-01,
+                  1.2433880043247045e-01,
+                  -1.8155664758471282e+00,
+                  1.3001492691233490e-01,
+                  -1.3108570766395222e+00,
+                  3.4351238519054299e-02,
+                  -5.1094822587115942e+00,
+                  9.4224572964963463e-02,
+                  1.5779704709083589e-01,
+                  1.3019617722050650e-01,
+                  -1.8556094822351865e+00,
+                  1.3590259835619947e-01,
+                  -1.3186695802599595e+00
+                ],
+                "output_scale": [
+                  1.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "inv_output_scale": [
+                  1.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "weights": [
+                  [
+                    -8.9284241392409491e-01,
+                    9.7697963167169788e-01,
+                    -1.6275353370730820e-02,
+                    2.2512350168120143e-01,
+                    1.4213371517228301e-01,
+                    -5.1773424730774409e-01,
+                    -1.0622904691121733e+00,
+                    -3.1955520224316747e-02,
+                    -1.0785186215440181e+00,
+                    1.5489401812544836e+00,
+                    -8.5515482824941824e-01,
+                    2.3797841734136826e-01,
+                    4.8237024510181292e-01,
+                    -1.4152608939125555e-01,
+                    -7.9672872743560252e-01,
+                    1.1068128193238187e+00,
+                    -8.0742874658860575e-01,
+                    9.7910734397592147e-01,
+                    5.0188401875581679e-01,
+                    4.1150086529999325e-02,
+                    7.3337067919660071e-01,
+                    -5.7915380456146237e-01,
+                    -2.9820299297318603e-01,
+                    1.0123063178588034e+00,
+                    2.5294247903945770e+00,
+                    -3.3627779366860961e+00
+                  ]
+                ]
+              }
+            }
+          },
+          "requestProbabilities": false
+        },
+        {
+          "type": "op.core.convert",
+          "pixelType": "UINT8"
+        }
+      ]
+    }
+  }
+}
