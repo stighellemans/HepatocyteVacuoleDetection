@@ -1,4 +1,5 @@
 # Hepatocyte Vacuole Detection in MAFLD using QuPath
+Peleman, C., Hellemans, S., Veeckmans, G. et al. Ferroptosis is a targetable detrimental factor in metabolic dysfunction-associated steatotic liver disease. Cell Death Differ (2024). https://doi.org/10.1038/s41418-024-01348-9
 
 This repository contains a QuPath script for the detection of vacuoles in hepatocyte cells, associated with Metabolic Associated Fatty Liver Disease (MAFLD), formerly known as Non-Alcoholic Fatty Liver Disease (NAFLD). The script utilizes the StarDist package for cell segmentation and a trained pixel classifier for vacuole detection.
 
